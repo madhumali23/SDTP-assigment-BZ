@@ -1,0 +1,62 @@
+@page
+@model BlindMatchPAS.Web.Areas.Identity.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="auth-page">
+    <div class="auth-card auth-card-wide">
+        <div class="auth-head">
+            <span class="auth-pill">Blind-Match PAS</span>
+            <h1 class="auth-title">Welcome back</h1>
+            <p class="auth-subtitle">Sign in to continue to your workspace.</p>
+        </div>
+
+        <div class="auth-grid">
+            <section>
+                <form id="account" method="post" class="auth-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email"></label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password"></label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        <label asp-for="Input.RememberMe" class="form-check-label"></label>
+                    </div>
+
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+
+                    <div class="auth-links mt-3">
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    </div>
+                </form>
+            </section>
+
+            <aside class="auth-aside">
+                <h2>What you can do after login</h2>
+                <ul>
+                    <li>Students submit and track project proposals.</li>
+                    <li>Supervisors review anonymous proposals fairly.</li>
+                    <li>Module leaders oversee allocations and interventions.</li>
+                    <li>Admins manage accounts and role assignments.</li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

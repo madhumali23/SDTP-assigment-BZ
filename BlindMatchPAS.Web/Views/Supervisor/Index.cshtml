@@ -1,0 +1,93 @@
+@model BlindMatchPAS.Web.Models.SupervisorDashboardViewModel
+@{
+    ViewData["Title"] = "Blind Review Dashboard";
+}
+
+<section class="page-card">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-3">
+        <div>
+            <span class="soft-badge">Blind Review</span>
+            <h1 class="h2 mt-2 mb-1">Supervisor Dashboard</h1>
+            <p class="text-muted mb-0">Student identity is hidden. Review proposals by topic and technical merit only.</p>
+        </div>
+        <a class="btn btn-outline-dark" asp-action="Expertise">Manage Expertise Tags</a>
+    </div>
+
+    <form method="get" class="row g-2 align-items-end mb-3">
+        <div class="col-md-5">
+            <label class="form-label">Filter by Research Area</label>
+            <select class="form-select" name="researchArea">
+                <option value="">All Areas</option>
+                @foreach (var area in Model.AvailableResearchAreas)
+                {
+                    if (string.Equals(area, Model.SelectedResearchArea, StringComparison.Ordinal))
+                    {
+                        <option value="@area" selected>@area</option>
+                    }
+                    else
+                    {
+                        <option value="@area">@area</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Proposal Scope</label>
+            <select class="form-select" name="onlyMyAreas">
+                @if (Model.OnlyMyAreas)
+                {
+                    <option value="true" selected>Only my expertise areas</option>
+                    <option value="false">All available areas</option>
+                }
+                else
+                {
+                    <option value="true">Only my expertise areas</option>
+                    <option value="false" selected>All available areas</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+            <button type="submit" class="btn btn-primary w-100">Apply</button>
+            <a asp-action="Index" class="btn btn-outline-dark">Reset</a>
+        </div>
+    </form>
+
+    @if (Model.ExpertiseAreas.Count == 0)
+    {
+        <div class="alert alert-warning">No expertise tags configured. Add tags to personalize review filtering.</div>
+    }
+    else
+    {
+        <div class="mb-3 d-flex gap-2 flex-wrap">
+            @foreach (var area in Model.ExpertiseAreas)
+            {
+                <span class="role-chip">@area</span>
+            }
+        </div>
+    }
+
+    @if (Model.Proposals.Count == 0)
+    {
+        <div class="alert alert-info mb-0">No anonymous proposals match your current filter.</div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var proposal in Model.Proposals)
+            {
+                <div class="col-md-6">
+                    <article class="role-card h-100">
+                        <div class="d-flex justify-content-between align-items-start gap-2">
+                            <h3 class="h5 mb-1">@proposal.Title</h3>
+                            <span class="status-badge status-@proposal.Status.ToString().ToLowerInvariant()">@proposal.Status</span>
+                        </div>
+                        <p class="text-muted mb-2"><strong>Research Area:</strong> @proposal.ResearchArea</p>
+                        <p class="text-muted mb-2"><strong>Tech Stack:</strong> @proposal.TechnicalStack</p>
+                        <p class="mb-3">@proposal.Abstract.Substring(0, Math.Min(proposal.Abstract.Length, 220))@(proposal.Abstract.Length > 220 ? "..." : "")</p>
+                        <a class="btn btn-sm btn-outline-dark" asp-action="Proposal" asp-route-id="@proposal.Id">View Anonymous Details</a>
+                    </article>
+                </div>
+            }
+        </div>
+    }
+</section>

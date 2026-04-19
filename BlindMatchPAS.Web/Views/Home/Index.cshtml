@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Blind-Match PAS";
+}
+
+<section class="hero-shell mb-4 mb-md-5">
+    <span class="soft-badge">Secure by Role</span>
+    <h1 class="hero-title mt-3">Project Approval System with Blind Matching</h1>
+    <p class="hero-sub mb-4">
+        Students propose projects, supervisors review anonymously, and identities are revealed only after a confirmed match.
+        Select your workspace below to begin with role-protected access.
+    </p>
+    <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index">Enter My Workspace</a>
+        <a class="btn btn-outline-dark" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Index", "Dashboard")">Sign In</a>
+    </div>
+</section>
+
+<section>
+    <div class="row g-3 g-md-4">
+        <div class="col-md-6 col-xl-3">
+            <article class="role-card">
+                <h3 class="h5">Student</h3>
+                <p class="text-muted">Submit, edit, and track project proposals until matched.</p>
+                <a class="btn btn-sm btn-outline-dark" asp-controller="Student" asp-action="Index">Open Student Portal</a>
+            </article>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <article class="role-card">
+                <h3 class="h5">Supervisor</h3>
+                <p class="text-muted">Review anonymous proposals and confirm research-aligned matches.</p>
+                <a class="btn btn-sm btn-outline-dark" asp-controller="Supervisor" asp-action="Index">Open Supervisor Portal</a>
+            </article>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <article class="role-card">
+                <h3 class="h5">Module Leader</h3>
+                <p class="text-muted">Monitor allocations and intervene where reassignment is needed.</p>
+                <a class="btn btn-sm btn-outline-dark" asp-controller="ModuleLeader" asp-action="Index">Open Leader Portal</a>
+            </article>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <article class="role-card">
+                <h3 class="h5">System Admin</h3>
+                <p class="text-muted">Manage user access and enforce platform-wide RBAC controls.</p>
+                <a class="btn btn-sm btn-outline-dark" asp-controller="SystemAdmin" asp-action="Index">Open Admin Portal</a>
+            </article>
+        </div>
+    </div>
+</section>

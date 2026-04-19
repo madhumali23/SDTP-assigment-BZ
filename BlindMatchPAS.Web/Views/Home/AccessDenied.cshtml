@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<section class="page-card text-center">
+    <span class="soft-badge">403</span>
+    <h1 class="hero-title mt-3">Access Denied</h1>
+    <p class="hero-sub">Your account is authenticated, but your role does not have permission to open this page.</p>
+    <div class="d-flex justify-content-center gap-2 flex-wrap mt-3">
+        <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index">Go to My Workspace</a>
+        <a class="btn btn-outline-dark" asp-controller="Home" asp-action="Index">Go Home</a>
+    </div>
+</section>

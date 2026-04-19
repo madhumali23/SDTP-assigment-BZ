@@ -1,0 +1,27 @@
+@model BlindMatchPAS.Web.Models.StudentProposalInputModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+<div class="mb-3">
+    <label asp-for="Title" class="form-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="ResearchArea" class="form-label"></label>
+    <input asp-for="ResearchArea" class="form-control" placeholder="e.g., Artificial Intelligence" />
+    <span asp-validation-for="ResearchArea" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="TechnicalStack" class="form-label"></label>
+    <input asp-for="TechnicalStack" class="form-control" placeholder="e.g., ASP.NET Core, SQL Server, Bootstrap" />
+    <span asp-validation-for="TechnicalStack" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Abstract" class="form-label"></label>
+    <textarea asp-for="Abstract" class="form-control" rows="7"></textarea>
+    <span asp-validation-for="Abstract" class="text-danger"></span>
+</div>

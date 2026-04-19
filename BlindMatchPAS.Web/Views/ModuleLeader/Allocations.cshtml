@@ -1,0 +1,63 @@
+@model IEnumerable<BlindMatchPAS.Web.Models.AllocationOverviewItemViewModel>
+@{
+    ViewData["Title"] = "Allocation Oversight";
+}
+
+<section class="page-card">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-3">
+        <div>
+            <span class="soft-badge">Oversight Dashboard</span>
+            <h1 class="h2 mt-2 mb-1">All Confirmed Matches</h1>
+            <p class="text-muted mb-0">Review current allocations and manually reassign when intervention is needed.</p>
+        </div>
+        <a class="btn btn-outline-dark" asp-action="Index">Back</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] is string success)
+    {
+        <div class="alert alert-success">@success</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info mb-0">No confirmed matches available.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Proposal</th>
+                        <th>Student</th>
+                        <th>Supervisor</th>
+                        <th>Research Area</th>
+                        <th>Confirmed</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProposalTitle</td>
+                        <td>
+                            <div>@item.StudentName</div>
+                            <small class="text-muted">@item.StudentEmail</small>
+                        </td>
+                        <td>
+                            <div>@item.SupervisorName</div>
+                            <small class="text-muted">@item.SupervisorEmail</small>
+                        </td>
+                        <td>@item.ResearchArea</td>
+                        <td>@item.ConfirmedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-dark" asp-action="Reassign" asp-route-matchId="@item.MatchId">Reassign</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

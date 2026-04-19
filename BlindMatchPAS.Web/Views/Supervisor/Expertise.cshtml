@@ -1,0 +1,52 @@
+@model IEnumerable<BlindMatchPAS.Web.Models.SupervisorExpertise>
+@{
+    ViewData["Title"] = "Manage Expertise";
+}
+
+<section class="page-card">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-3">
+        <div>
+            <span class="soft-badge">Expertise Management</span>
+            <h1 class="h2 mt-2 mb-1">Research Areas and Tags</h1>
+            <p class="text-muted mb-0">These tags define the proposals prioritized in your blind-review dashboard.</p>
+        </div>
+        <a class="btn btn-outline-dark" asp-action="Index">Back to Dashboard</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] is string success)
+    {
+        <div class="alert alert-success">@success</div>
+    }
+    @if (TempData["ErrorMessage"] is string error)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+
+    <form asp-action="AddExpertise" method="post" class="row g-2 mb-4">
+        <div class="col-md-9">
+            <label class="form-label">Add Research Area</label>
+            <input name="researchArea" class="form-control" placeholder="e.g., Machine Learning" required minlength="2" maxlength="120" />
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Add Tag</button>
+        </div>
+    </form>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info mb-0">No expertise tags yet.</div>
+    }
+    else
+    {
+        <div class="d-flex flex-wrap gap-2">
+            @foreach (var item in Model)
+            {
+                <form asp-action="RemoveExpertise" method="post" class="d-inline-flex align-items-center gap-2 tag-pill">
+                    <span>@item.ResearchArea</span>
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" class="btn-close btn-close-white" aria-label="Remove"></button>
+                </form>
+            }
+        </div>
+    }
+</section>

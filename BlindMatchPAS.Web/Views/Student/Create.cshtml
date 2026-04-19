@@ -1,0 +1,22 @@
+@model BlindMatchPAS.Web.Models.StudentProposalInputModel
+@{
+    ViewData["Title"] = "Create Proposal";
+}
+
+<section class="page-card">
+    <span class="soft-badge">New Proposal</span>
+    <h1 class="h2 mt-2">Create Project Proposal</h1>
+    <p class="text-muted">All fields are required. New proposals start in Pending status.</p>
+
+    <form asp-action="Create" method="post" novalidate>
+        <partial name="_ProposalForm" model="Model" />
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-primary">Submit Proposal</button>
+            <a asp-action="Index" class="btn btn-outline-dark">Cancel</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

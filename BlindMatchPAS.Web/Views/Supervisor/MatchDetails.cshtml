@@ -1,0 +1,49 @@
+@model BlindMatchPAS.Web.Models.MatchDetailsViewModel
+@{
+    ViewData["Title"] = "Match Details";
+}
+
+<section class="page-card">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+        <div>
+            <span class="soft-badge">Matched Project</span>
+            <h1 class="h2 mt-2 mb-1">@Model.ProposalTitle</h1>
+            <p class="mb-0"><span class="status-badge status-@Model.Status.ToString().ToLowerInvariant()">@Model.Status</span></p>
+        </div>
+        <a class="btn btn-outline-dark" asp-action="Index">Back to Dashboard</a>
+    </div>
+
+    <hr />
+    <dl class="row mb-0">
+        <dt class="col-md-3">Research Area</dt>
+        <dd class="col-md-9">@Model.ResearchArea</dd>
+
+        <dt class="col-md-3">Technical Stack</dt>
+        <dd class="col-md-9">@Model.TechnicalStack</dd>
+
+        <dt class="col-md-3">Abstract</dt>
+        <dd class="col-md-9" style="white-space: pre-line;">@Model.ProposalAbstract</dd>
+
+        <dt class="col-md-3">Confirmed At</dt>
+        <dd class="col-md-9">@(Model.ConfirmedAtUtc.HasValue ? Model.ConfirmedAtUtc.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm") : "-")</dd>
+    </dl>
+
+    <hr />
+    <h2 class="h4">Identity Reveal</h2>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="role-card">
+                <h3 class="h6 text-uppercase text-muted">Student</h3>
+                <p class="mb-1"><strong>Name:</strong> @Model.StudentName</p>
+                <p class="mb-0"><strong>Contact:</strong> @Model.StudentEmail</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="role-card">
+                <h3 class="h6 text-uppercase text-muted">Supervisor</h3>
+                <p class="mb-1"><strong>Name:</strong> @Model.SupervisorName</p>
+                <p class="mb-0"><strong>Contact:</strong> @Model.SupervisorEmail</p>
+            </div>
+        </div>
+    </div>
+</section>

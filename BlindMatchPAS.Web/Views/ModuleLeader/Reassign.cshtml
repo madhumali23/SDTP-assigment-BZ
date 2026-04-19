@@ -1,0 +1,43 @@
+@model BlindMatchPAS.Web.Models.ReassignMatchViewModel
+@{
+    ViewData["Title"] = "Reassign Match";
+}
+
+<section class="page-card">
+    <span class="soft-badge">Manual Intervention</span>
+    <h1 class="h2 mt-2">Reassign Supervisor</h1>
+    <p class="text-muted mb-3">Proposal: <strong>@Model.ProposalTitle</strong></p>
+
+    <form asp-action="Reassign" method="post" novalidate>
+        <input asp-for="MatchId" type="hidden" />
+        <input asp-for="ProposalId" type="hidden" />
+        <input asp-for="ProposalTitle" type="hidden" />
+
+        <div class="mb-3">
+            <label asp-for="NewSupervisorUserId" class="form-label"></label>
+            <select asp-for="NewSupervisorUserId" class="form-select">
+                @foreach (var sup in Model.Supervisors)
+                {
+                    if (sup.UserId == Model.NewSupervisorUserId)
+                    {
+                        <option value="@sup.UserId" selected>@sup.DisplayName</option>
+                    }
+                    else
+                    {
+                        <option value="@sup.UserId">@sup.DisplayName</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="NewSupervisorUserId" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Confirm Reassignment</button>
+            <a asp-action="Allocations" class="btn btn-outline-dark">Cancel</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

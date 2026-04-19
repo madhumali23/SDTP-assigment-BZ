@@ -1,0 +1,84 @@
+@model BlindMatchPAS.Web.Models.ResearchAreaManagementViewModel
+@{
+    ViewData["Title"] = "Research Area Management";
+}
+
+<section class="page-card">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-3">
+        <div>
+            <span class="soft-badge">Research Area CRUD</span>
+            <h1 class="h2 mt-2 mb-1">Manage Research Areas</h1>
+            <p class="text-muted mb-0">Create, edit, and remove valid research tags used across the PAS.</p>
+        </div>
+        <a class="btn btn-outline-dark" asp-action="Index">Back</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] is string success)
+    {
+        <div class="alert alert-success">@success</div>
+    }
+    @if (TempData["ErrorMessage"] is string error)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+
+    <form asp-action="CreateResearchArea" method="post" class="row g-2 mb-4" novalidate>
+        <div class="col-md-4">
+            <label class="form-label">Name</label>
+            <input asp-for="NewArea.Name" class="form-control" />
+            <span asp-validation-for="NewArea.Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Description (optional)</label>
+            <input asp-for="NewArea.Description" class="form-control" />
+            <span asp-validation-for="NewArea.Description" class="text-danger"></span>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Create</button>
+        </div>
+    </form>
+
+    @if (!Model.Areas.Any())
+    {
+        <div class="alert alert-info mb-0">No research areas defined yet.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var area in Model.Areas)
+                {
+                    <tr>
+                        <td>@area.Name</td>
+                        <td>@(string.IsNullOrWhiteSpace(area.Description) ? "-" : area.Description)</td>
+                        <td class="text-end">
+                            <form asp-action="UpdateResearchArea" method="post" class="d-inline-flex gap-2 align-items-center">
+                                <input type="hidden" name="Id" value="@area.Id" />
+                                <input type="text" name="Name" value="@area.Name" class="form-control form-control-sm" style="width: 170px;" required maxlength="120" />
+                                <input type="text" name="Description" value="@area.Description" class="form-control form-control-sm" style="width: 220px;" maxlength="500" />
+                                <button type="submit" class="btn btn-sm btn-outline-dark">Save</button>
+                            </form>
+                            <form asp-action="DeleteResearchArea" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@area.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this research area?');">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

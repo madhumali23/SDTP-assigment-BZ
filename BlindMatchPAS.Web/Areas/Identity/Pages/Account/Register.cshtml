@@ -1,0 +1,61 @@
+@page
+@model BlindMatchPAS.Web.Areas.Identity.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="auth-page">
+    <div class="auth-card auth-card-wide">
+        <div class="auth-head">
+            <span class="auth-pill">Blind-Match PAS</span>
+            <h1 class="auth-title">Create your account</h1>
+            <p class="auth-subtitle">Register with your email to access the platform.</p>
+        </div>
+
+        <div class="auth-grid">
+            <section>
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="auth-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email"></label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password"></label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.ConfirmPassword"></label>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+
+                    <div class="auth-links mt-3">
+                        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account? Log in</a>
+                    </div>
+                </form>
+            </section>
+
+            <aside class="auth-aside">
+                <h2>Registration notes</h2>
+                <ul>
+                    <li>Use a valid email format to create your account.</li>
+                    <li>Choose a strong password that meets platform policy.</li>
+                    <li>Role assignment is managed by the system administrator.</li>
+                    <li>You can sign in immediately after account creation.</li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
