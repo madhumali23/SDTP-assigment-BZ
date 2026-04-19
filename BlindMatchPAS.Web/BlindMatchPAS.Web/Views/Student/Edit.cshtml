@@ -1,0 +1,22 @@
+@model BlindMatchPAS.Web.Models.StudentProposalInputModel
+@{
+    ViewData["Title"] = "Edit Proposal";
+}
+
+<section class="page-card">
+    <span class="soft-badge">Update Proposal</span>
+    <h1 class="h2 mt-2">Edit Project Proposal</h1>
+    <p class="text-muted">Editing is available only while status is Pending or Under Review.</p>
+
+    <form asp-action="Edit" method="post" novalidate>
+        <partial name="_ProposalForm" model="Model" />
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a asp-action="Index" class="btn btn-outline-dark">Cancel</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Request Status";
+    var code = ViewData["StatusCode"] is int c ? c : 0;
+}
+
+<section class="page-card text-center">
+    <span class="soft-badge">Status @code</span>
+    <h1 class="hero-title mt-3">Something Interrupted Your Request</h1>
+    <p class="hero-sub">The page returned HTTP status @code. Use the links below to continue safely.</p>
+    <div class="d-flex justify-content-center gap-2 flex-wrap mt-3">
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Go Home</a>
+        <a class="btn btn-outline-dark" asp-controller="Dashboard" asp-action="Index">My Workspace</a>
+    </div>
+</section>

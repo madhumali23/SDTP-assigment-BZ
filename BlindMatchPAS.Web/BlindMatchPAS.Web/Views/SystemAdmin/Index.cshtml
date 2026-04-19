@@ -1,0 +1,91 @@
+@model BlindMatchPAS.Web.Models.SystemAdminIndexViewModel
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<section class="page-card">
+    <span class="soft-badge">System Administrator</span>
+    <h1 class="h2 mt-3">User Management</h1>
+    <p class="text-muted">Create accounts, assign roles, and maintain access control.</p>
+
+    @if (TempData["SuccessMessage"] is string success)
+    {
+        <div class="alert alert-success">@success</div>
+    }
+    @if (TempData["ErrorMessage"] is string error)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+
+    <h2 class="h5 mt-4">Create User</h2>
+    <form asp-action="CreateUser" method="post" class="row g-2 mb-4" novalidate>
+        <div class="col-md-4">
+            <label asp-for="NewUser.Email" class="form-label"></label>
+            <input asp-for="NewUser.Email" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="NewUser.Password" class="form-label"></label>
+            <input asp-for="NewUser.Password" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="NewUser.Role" class="form-label"></label>
+            <select asp-for="NewUser.Role" class="form-select">
+                @foreach (var role in Model.AvailableRoles)
+                {
+                    <option value="@role">@role</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Create</button>
+        </div>
+    </form>
+
+    <h2 class="h5">Existing Users</h2>
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>@user.UserName</td>
+                    <td>
+                        <form asp-action="UpdateUserRole" method="post" class="d-flex gap-2">
+                            <input type="hidden" name="userId" value="@user.UserId" />
+                            <select name="role" class="form-select form-select-sm" style="max-width: 190px;">
+                                @foreach (var role in Model.AvailableRoles)
+                                {
+                                    if (role == user.Role)
+                                    {
+                                        <option selected value="@role">@role</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@role">@role</option>
+                                    }
+                                }
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-outline-dark">Update Role</button>
+                        </form>
+                    </td>
+                    <td class="text-end">
+                        <form asp-action="DeleteUser" method="post" class="d-inline">
+                            <input type="hidden" name="userId" value="@user.UserId" />
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this user account?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</section>

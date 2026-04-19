@@ -1,0 +1,70 @@
+@model IEnumerable<BlindMatchPAS.Web.Models.ProjectProposal>
+@using BlindMatchPAS.Web.Models
+@{
+    ViewData["Title"] = "My Proposals";
+}
+
+<section class="page-card">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-3">
+        <div>
+            <span class="soft-badge">Student Module</span>
+            <h1 class="h2 mt-2 mb-1">My Project Proposals</h1>
+            <p class="text-muted mb-0">Create, review, edit, and withdraw proposals before a match is confirmed.</p>
+        </div>
+        <a class="btn btn-primary" asp-action="Create">Create Proposal</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] is string success)
+    {
+        <div class="alert alert-success">@success</div>
+    }
+    @if (TempData["ErrorMessage"] is string error)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info mb-0">No proposals yet. Create your first proposal to begin the review process.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Research Area</th>
+                        <th>Technical Stack</th>
+                        <th>Status</th>
+                        <th>Submitted</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var proposal in Model)
+                {
+                    var isEditable = proposal.Status is ProposalStatus.Pending or ProposalStatus.UnderReview;
+                    <tr>
+                        <td>@proposal.Title</td>
+                        <td>@proposal.ResearchArea</td>
+                        <td>@proposal.TechnicalStack</td>
+                        <td><span class="status-badge status-@proposal.Status.ToString().ToLowerInvariant()">@proposal.Status</span></td>
+                        <td>@proposal.CreatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-dark" asp-action="Details" asp-route-id="@proposal.Id">View</a>
+                            @if (isEditable)
+                            {
+                                <a class="btn btn-sm btn-outline-dark" asp-action="Edit" asp-route-id="@proposal.Id">Edit</a>
+                                <form asp-action="Withdraw" asp-route-id="@proposal.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Withdraw this proposal?');">Withdraw</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
