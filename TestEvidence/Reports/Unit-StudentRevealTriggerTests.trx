@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="d3bc6eaa-e8ec-4162-987f-302a9b43f9d5" name="PATHAYAA@DESKTOP-4LLHASP 2026-04-17 21:47:47" runUser="DESKTOP-4LLHASP\PATHAYAA" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-04-17T21:47:47.3304995+05:30" queuing="2026-04-17T21:47:47.3304999+05:30" start="2026-04-17T21:47:40.2463495+05:30" finish="2026-04-17T21:47:47.3341808+05:30" />
+  <TestSettings name="default" id="bba2ac49-67ca-4477-9849-03834ac83450">
+    <Deployment runDeploymentRoot="PATHAYAA_DESKTOP-4LLHASP_2026-04-17_21_47_47" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="bc77531f-2b99-4d34-a711-ce07ef974392" testId="9b0a020d-3ad5-40d3-0f85-8517facebfea" testName="BlindMatchPAS.Tests.StudentRevealTriggerTests.Details_WhenUnmatched_DoesNotRevealIdentity" computerName="DESKTOP-4LLHASP" duration="00:00:00.0189900" startTime="2026-04-17T21:47:47.2574489+05:30" endTime="2026-04-17T21:47:47.2574490+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bc77531f-2b99-4d34-a711-ce07ef974392" />
+    <UnitTestResult executionId="d113fca8-39d4-429c-b7f1-7225cb464f35" testId="557383ca-542d-26c2-7767-60a00ca85bfc" testName="BlindMatchPAS.Tests.StudentRevealTriggerTests.Details_WhenMatched_RevealsStudentAndSupervisorIdentity" computerName="DESKTOP-4LLHASP" duration="00:00:01.9124081" startTime="2026-04-17T21:47:47.2387814+05:30" endTime="2026-04-17T21:47:47.2387959+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d113fca8-39d4-429c-b7f1-7225cb464f35" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="BlindMatchPAS.Tests.StudentRevealTriggerTests.Details_WhenUnmatched_DoesNotRevealIdentity" storage="e:\software-development-tools-assignment\blindmatchpas.tests\bin\debug\net9.0\blindmatchpas.tests.dll" id="9b0a020d-3ad5-40d3-0f85-8517facebfea">
+      <Execution id="bc77531f-2b99-4d34-a711-ce07ef974392" />
+      <TestMethod codeBase="E:\Software-Development-Tools-Assignment\BlindMatchPAS.Tests\bin\Debug\net9.0\BlindMatchPAS.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BlindMatchPAS.Tests.StudentRevealTriggerTests" name="Details_WhenUnmatched_DoesNotRevealIdentity" />
+    </UnitTest>
+    <UnitTest name="BlindMatchPAS.Tests.StudentRevealTriggerTests.Details_WhenMatched_RevealsStudentAndSupervisorIdentity" storage="e:\software-development-tools-assignment\blindmatchpas.tests\bin\debug\net9.0\blindmatchpas.tests.dll" id="557383ca-542d-26c2-7767-60a00ca85bfc">
+      <Execution id="d113fca8-39d4-429c-b7f1-7225cb464f35" />
+      <TestMethod codeBase="E:\Software-Development-Tools-Assignment\BlindMatchPAS.Tests\bin\Debug\net9.0\BlindMatchPAS.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BlindMatchPAS.Tests.StudentRevealTriggerTests" name="Details_WhenMatched_RevealsStudentAndSupervisorIdentity" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="9b0a020d-3ad5-40d3-0f85-8517facebfea" executionId="bc77531f-2b99-4d34-a711-ce07ef974392" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="557383ca-542d-26c2-7767-60a00ca85bfc" executionId="d113fca8-39d4-429c-b7f1-7225cb464f35" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 9.0.8)&#xD;
+[xUnit.net 00:00:00.72]   Discovering: BlindMatchPAS.Tests&#xD;
+[xUnit.net 00:00:00.84]   Discovered:  BlindMatchPAS.Tests&#xD;
+[xUnit.net 00:00:00.85]   Starting:    BlindMatchPAS.Tests&#xD;
+[xUnit.net 00:00:02.82]   Finished:    BlindMatchPAS.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
